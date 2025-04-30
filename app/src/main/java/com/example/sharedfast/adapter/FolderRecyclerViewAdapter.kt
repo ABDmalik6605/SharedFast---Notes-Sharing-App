@@ -124,4 +124,58 @@ class FolderRecyclerViewAdapter(
             Toast.makeText(context, "Failed to share: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
+    //    private fun shareFolder(context: Context, folder: FolderModel) {
+//        try {
+//            val folderFiles = File(folder.folderPath).listFiles()
+//            val uris = folderFiles?.map { file ->
+//                FileProvider.getUriForFile(
+//                    context,
+//                    "${context.packageName}.fileprovider",
+//                    file
+//                )
+//            }?.toList() ?: emptyList()
+//
+//            if (uris.isEmpty()) {
+//                Toast.makeText(context, "No files to share in the folder", Toast.LENGTH_SHORT).show()
+//                return
+//            }
+//
+//            val shareIntent = Intent(Intent.ACTION_SEND_MULTIPLE).apply {
+//                putParcelableArrayListExtra(Intent.EXTRA_STREAM, ArrayList(uris))
+//                type = "/"
+//                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+//            }
+//
+//            val packageManager = context.packageManager
+//            val resolvedInfos = packageManager.queryIntentActivities(shareIntent, 0)
+//
+//            val allowedPackages = listOf(
+//                "com.android.bluetooth",
+//                "com.facebook.katana",
+//                "com.google.android.gm",
+//                "com.whatsapp"
+//            )
+//
+//            val targetedIntents = resolvedInfos.mapNotNull { info ->
+//                val packageName = info.activityInfo.packageName
+//                if (allowedPackages.contains(packageName)) {
+//                    Intent(shareIntent).apply {
+//                        setPackage(packageName)
+//                        setClassName(packageName, info.activityInfo.name)
+//                    }
+//                } else null
+//            }.toMutableList()
+//
+//            if (targetedIntents.isNotEmpty()) {
+//                val chooserIntent = Intent.createChooser(targetedIntents.removeAt(0), "Share via")
+//                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, targetedIntents.toTypedArray())
+//                context.startActivity(chooserIntent)
+//            } else {
+//                Toast.makeText(context, "No allowed apps installed for sharing", Toast.LENGTH_SHORT).show()
+//            }
+//
+//        } catch (e: Exception) {
+//            Toast.makeText(context, "Failed to share: ${e.message}", Toast.LENGTH_SHORT).show()
+//        }
+//    }
 }
